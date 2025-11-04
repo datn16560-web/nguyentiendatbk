@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+#include <algorithm>
+int Partition(int a[], int first, int last);
+void Quicksort( int a[], int first, int last);
+void Quicksort(int a[], int first, int last){
+	if(first < last){
+		int pivot = Partition(a, first, last);
+			Quicksort(a, first, pivot - 1);
+			Quicksort(a, pivot + 1, last);
+	}
+	return;
+}
+int Partition(int a[], int first, int last){
+	int i = first, j= last + 1, p = a[first];
+	while(i < j){
+		++i;
+		while( ( i <= last ) && ( a[i] < p ) )
+			++ i;  
+		-- j;
+		while( ( j >= first ) && ( a[j] > p ) )
+		-- j;
+			swap( a[i], a[j]);
+    }
+    swap( a[i],a[j]);
+    swap( a[j], a[first] );
+    return j;
+}
+int main() {
+    int n;
+    cout << " ";
+    cin >> n;
+    int a[10000];
+    for (int i = 0; i < n; i++) cin >> a[i];
+    Quicksort(a, 0, n - 1);
+    for (int i = 0; i < n; i++) cout << a[i] << " ";
+}
