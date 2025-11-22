@@ -1,0 +1,79 @@
+//khai bao danh sach
+struct Hoc_sinh{
+	String Ho_Ten
+	String MSSV
+	int namsinh
+	float GPA
+};
+struct Node{
+	student data;
+	Node*next;
+};
+struct List{Node*FirstNode;};
+//Ham in danh sach
+void Danh_sach(List*list){
+	Node*node = list-> FirstNode;
+	int i=1;
+	if(node == 0){
+		cout <<"\n danhsachrong.\n";
+		return 0;
+	}
+	cout <<"\n danhsachsinhvien\n";
+	while( node != 0){
+		cout << "\n Sinhvien" << i++ <<":\n";
+		cout << "Ho_Ten:"<< node -> data.Ho_Ten<<endl;
+		cout <<"MSSV:"<< node->data.MSSV << endl;
+		cout <<"namsinh:"<< node->data.namsinh << endl;
+		cout <<"GPA:" << node -> data.GPA << endl;
+		node = node -> next;
+	}
+	cout<< " \n";
+}
+// ham tinh chieu dai
+int chieu_dai (list*list){
+	Node*node = list -> Firstnode;
+	int cout = 0;
+	while (node !=0){
+		cout ++ ;
+		node = node -> next;
+	}
+	return 0;
+}
+// diem so co GPA>3.2
+int Diem_GPA_cao (list*list){
+	Node*node = list -> Firstnode;
+	int cout = 0;
+	while (node !=0){
+		if ( node -> data.GPA > 3.2)
+			cout ++;
+		node = node -> next;
+	}
+	return 0;
+}
+// sap xep danh sach theo thu tu tang dan
+void sapxep_GPA(List* list) {
+    for (Node* x = list->firstNode; x != 0; x = x->next) {
+        for (Node* y = x->next; y != 0; y = y->next) {
+            if (x->data.gpa > y->data.gpa) {
+                SinhVien tmp = x->data;
+                x->data = y->data;
+                y->data = tmp;
+            }
+        }
+    }
+}
+// chen sinh vien co GPA=2.4
+void chen_GPA(List* list, sinhvien x) {
+    Node* a = MakeNode(x);
+    if (list -> firstNode == 0 || x.GPA < list -> firstNode -> data.GPA) {
+        a -> next = list -> firstNode;
+        list -> firstNode = a;
+        return 0;
+    }
+    Node* node = list -> firstNode;
+    while (node -> next != 0 && node -> next -> data.GPA < x.GPA) {
+        node = node -> next;
+    }
+    a -> next = node -> next;
+    node->next = a;
+}
